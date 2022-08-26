@@ -9,28 +9,37 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       displayName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: {
+          msg: 'O email deve ser Unico'
+        },
+        validate: {
+          isEmail: {
+            msg: 'Email Invalido'
+          },
+          notEmpty: {
+            msg: 'Escreva o email'
+          }
+        },
+        allowNull: false,
       },
       password: {
-        type: Sequelize.INTEGER
-      },
-      image: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      createdAt: {
+      image: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Users');
   }
 };
+
+// validar o email https://es.stackoverflow.com/questions/364894/sequelize-validar-email-unico

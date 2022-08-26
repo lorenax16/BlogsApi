@@ -13,26 +13,26 @@ module.exports = {
         type: Sequelize.STRING
       },
       content: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onUpdate: 'CASCADE',
-        field: 'user_Id',
+        foreignKey: true,
         references: {
           model: 'Users',
           key: 'id',
         },
-        published: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-        updated: {
-          allowNull: false,
-          type: Sequelize.DATE
-        },
-      }
+      },
+      published: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
     });
   },
 
