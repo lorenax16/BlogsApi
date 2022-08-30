@@ -1,6 +1,6 @@
 const Categories = (sequelize, DataTypes) => {
   const Categories = sequelize.define("Categorie", {
-    id: DataTypes.INTEGER,
+    id: { type: DataTypes.INTEGER, primaryKey: true},
     name: DataTypes.STRING,
   });
   return Categories;
