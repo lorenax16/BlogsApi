@@ -1,0 +1,23 @@
+// const user = require('../services/serviceUser');
+const userService = require('../services/serviceUser');
+
+const userController = {
+  login: async (req, res) => {
+    const { email, password } = req.body;
+    console.log(email, 'email');
+      const result = await userService.login({ email, password });
+      if (!result) return res.status(400).json({ message: 'Invalid fields' });
+      return res.status(200).json({ token: result });
+  },
+
+  create: async (req, res) => {
+    const { displayName, email, password, image } = req.body;
+    console.log(email, 'nome');
+  
+    const result = await userService.create({ displayName, email, password, image });
+    // console.log(result, 'nome');
+    return res.status(201).json({ token: result });
+  },
+};
+
+module.exports = userController;

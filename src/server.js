@@ -1,10 +1,12 @@
 require('dotenv').config();
 const app = require('./api');
-const login = require('./controllers/loginController');
+const userController = require('./controllers/userController');
 const validationLogin = require('./middlewares/validateLogin');
+const verificaUser = require('./middlewares/validationUser');
 require('express-async-errors');
 
-app.post('/login', validationLogin, login);
+app.post('/login', validationLogin, userController.login);
+app.post('/user', verificaUser, userController.create);
 // não remova a variável `API_PORT` ou o `listen`
 const port = process.env.API_PORT || 3000;
 
