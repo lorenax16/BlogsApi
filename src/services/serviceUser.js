@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const { createToken } = require('../middlewares/token');
+const createToken = require('../middlewares/token');
 
 const userServices = {
   login: async ({ email, _password }) => {
@@ -27,6 +27,12 @@ const userServices = {
     const result = await User.create({ displayName, email, password, image });
     const token = createToken(result);
     return token;
+  },
+
+  getAll: async () => {
+    const result = await User.findAll({
+      attributes: { exclude: ['password'] } });
+    return result;
   },
 };
 

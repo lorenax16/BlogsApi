@@ -18,6 +18,11 @@ const userController = {
     // console.log(result, 'nome');
     return res.status(201).json({ token: result });
   },
+
+  getAll: async (req, res) => {
+    const result = await userService.getAll();
+    return res.status(200).json(result);
+  },
 };
 
 module.exports = userController;
