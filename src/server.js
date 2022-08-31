@@ -2,17 +2,17 @@ require('dotenv').config();
 const app = require('./api');
 const userController = require('./controllers/userController');
 const categoriesController = require('./controllers/categoryController');
-const validationLogin = require('./middlewares/validateLogin');
-const verificaUser = require('./middlewares/validationUser');
-const validateCategory = require('./middlewares/validaCategory');
+const validates = require('./middlewares/validates');
 const auth = require('./middlewares/auth');
 require('express-async-errors');
 
-app.post('/login', validationLogin, userController.login);
-app.post('/user', verificaUser, userController.create);
+app.post('/login', validates.validationLogin, userController.login);
+app.post('/user', validates.verificaUser, userController.create);
 app.get('/user', auth, userController.getAll);
 app.get('/user/:id', auth, userController.getById);
-app.post('/categories', validateCategory, auth, categoriesController.create);
+
+app.post('/categories', validates.validateCategory, auth, categoriesController.create);
+app.get('/categories', auth, categoriesController.getAll);
 // não remova a variável `API_PORT` ou o `listen`
 const port = process.env.API_PORT || 3000;
 

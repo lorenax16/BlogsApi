@@ -6,6 +6,11 @@ const categoriesController = {
     const result = await categoriesServer.create({ name });
     return res.status(201).json(result);
   },
+
+  getAll: async (req, res) => {
+    const result = await categoriesServer.getAll();
+    return res.status(200).json(result);
+  },
 };
 
 module.exports = categoriesController;
