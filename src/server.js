@@ -9,6 +9,7 @@ require('express-async-errors');
 app.post('/login', validationLogin, userController.login);
 app.post('/user', verificaUser, userController.create);
 app.get('/user', auth, userController.getAll);
+app.get('/user/:id', auth, userController.getById);
 // não remova a variável `API_PORT` ou o `listen`
 const port = process.env.API_PORT || 3000;
 

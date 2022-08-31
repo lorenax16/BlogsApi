@@ -34,6 +34,12 @@ const userServices = {
       attributes: { exclude: ['password'] } });
     return result;
   },
+
+  getById: async (id) => {
+    const result = await User.findByPk(id, {
+      attributes: { exclude: ['password'] } });
+    return result;
+  },
 };
 
 module.exports = userServices;
