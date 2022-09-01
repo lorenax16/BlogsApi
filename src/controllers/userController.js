@@ -1,4 +1,3 @@
-// const user = require('../services/serviceUser');
 const userService = require('../services/serviceUser');
 
 const userController = {
@@ -29,6 +28,13 @@ const userController = {
     const result = await userService.getById(id);
     if (!result) return res.status(404).json({ message: 'User does not exist' });
     return res.status(200).json(result);
+  },
+
+  destroy: async (req, res) => {
+    const data = req.user;
+    console.log(data, 'data');
+    await userService.destroy(data);
+    return res.status(204).end();
   },
 };
 

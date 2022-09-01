@@ -40,6 +40,14 @@ const userServices = {
       attributes: { exclude: ['password'] } });
     return result;
   },
+
+  destroy: async (email) => {
+    // console.log(id);
+    const user = await User.findOne({ where: { email } });
+    console.log(user.id, 'id');
+    const result = await User.destroy({ where: { id: user.id } });
+    return result;
+  },
 };
 
 module.exports = userServices;
