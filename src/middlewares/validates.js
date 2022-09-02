@@ -1,3 +1,5 @@
+const { Category } = require('../database/models');
+
 const validated = {
   validationLogin: (req, res, next) => {
     const { email, password } = req.body;
@@ -39,6 +41,31 @@ const validated = {
       err.status = 400;
       throw err;
     }
+    next();
+  },
+
+  validatePost: (req, res, next) => {
+    const { title, content } = req.body;
+
+    if (!title || title.length === 0) {
+      return res.status(400).json({ message: 'Some required fields are missing' });
+    }
+    if (!content || content.length === 0) {
+      return res.status(400).json({ message: 'Some required fields are missing' });
+    }
+    next();
+  },
+
+  verifyCategory: async (req, res, next) => {
+    const { categoryIds } = req.body;
+    const findCategories = await Category.findAll();
+    const existingCategories = findCategories.map((item) => item.dataValues.id);
+    let existente = 0;
+    categoryIds.forEach((item) => {
+      if (existingCategories.includes(item)) existente += 1;
+    });
+
+    if (existente === 0) res.status(400).json({ message: '"categoryIds" not found' });
     next();
   },
 };

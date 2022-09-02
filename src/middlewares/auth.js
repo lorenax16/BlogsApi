@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
   try {
     const { data } = jwt.verify(authorization, JWT_SECRET);
     req.user = data;
-    console.log(req.user, 'req');
+    // console.log(req.user, 'req');
     next();
   } catch (error) {
     res.status(401).json({ message: 'Expired or invalid token' });

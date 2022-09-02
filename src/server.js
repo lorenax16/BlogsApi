@@ -17,7 +17,8 @@ app.delete('/user/me', auth, userController.destroy);
 app.post('/categories', validates.validateCategory, auth, categoriesController.create);
 app.get('/categories', auth, categoriesController.getAll);
 // BlogPost
-app.post('/post', blogPostController.create);
+app.post('/post', validates.validatePost, validates.verifyCategory,
+auth, blogPostController.create);
 // não remova a variável `API_PORT` ou o `listen`
 const port = process.env.API_PORT || 3000;
 
