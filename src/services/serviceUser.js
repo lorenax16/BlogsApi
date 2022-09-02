@@ -41,11 +41,11 @@ const userServices = {
     return result;
   },
 
-  destroy: async (email) => {
+  destroy: async (id) => {
     // console.log(id);
-    const user = await User.findOne({ where: { email } });
+    await User.findOne({ where: { id } });
     // console.log(user.id, 'id');
-    const result = await User.destroy({ where: { id: user.id } });
+    const result = await User.destroy({ where: { id } });
     return result;
   },
 };

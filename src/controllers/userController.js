@@ -31,9 +31,9 @@ const userController = {
   },
 
   destroy: async (req, res) => {
-    const data = req.user;
-    console.log(data, 'data');
-    await userService.destroy(data);
+    const { id } = req.user;
+    console.log(id, 'data');
+    await userService.destroy(id);
     return res.status(204).end();
   },
 };
